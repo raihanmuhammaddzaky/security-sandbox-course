@@ -1,4 +1,4 @@
-const { users } = require('../utils/db');
+import { users } from '../utils/db.js';
 
 const login = (username, password) => {
     if (users[username] && users[username].password === password) {
@@ -7,4 +7,4 @@ const login = (username, password) => {
     return { success: false };
 };
 
-module.exports = { login };
+export default { login };

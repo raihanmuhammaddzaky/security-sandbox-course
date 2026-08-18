@@ -1,7 +1,8 @@
-const express = require('express');
-const cookieParser = require('cookie-parser');
+import express from 'express';
+import cookieParser from 'cookie-parser';
 // TODO 1 (CORS): Import library 'cors' di sini
-const routes = require('./routes');
+// import cors from 'cors';
+import routes from './routes/index.js';
 
 const app = express();
 
@@ -15,4 +16,4 @@ app.use(cookieParser());
 
 app.use('/', routes);
 
-module.exports = app;
+export default app;

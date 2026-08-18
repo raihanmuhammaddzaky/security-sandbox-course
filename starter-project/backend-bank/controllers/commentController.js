@@ -1,4 +1,4 @@
-const commentService = require('../services/commentService');
+import commentService from '../services/commentService.js';
 
 const getComments = (req, res) => {
     res.json(commentService.getComments());
@@ -12,4 +12,4 @@ const addComment = (req, res) => {
     res.json({ message: "Komentar berhasil ditambahkan!", comment: newComment });
 };
 
-module.exports = { getComments, addComment };
+export default { getComments, addComment };

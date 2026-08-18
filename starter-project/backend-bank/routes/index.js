@@ -1,12 +1,12 @@
-const express = require('express');
-const router = express.Router();
+import express from 'express';
+import authRoutes from './authRoutes.js';
+import bankRoutes from './bankRoutes.js';
+import commentRoutes from './commentRoutes.js';
 
-const authRoutes = require('./authRoutes');
-const bankRoutes = require('./bankRoutes');
-const commentRoutes = require('./commentRoutes');
+const router = express.Router();
 
 router.use('/', authRoutes);
 router.use('/', bankRoutes);
 router.use('/komentar', commentRoutes);
 
-module.exports = router;
+export default router;

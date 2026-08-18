@@ -1,4 +1,4 @@
-const { comments } = require('../utils/db');
+import { comments } from '../utils/db.js';
 
 const getComments = () => {
     return comments;
@@ -10,4 +10,4 @@ const addComment = (text) => {
     return newComment;
 };
 
-module.exports = { getComments, addComment };
+export default { getComments, addComment };

@@ -1,4 +1,4 @@
-const authService = require('../services/authService');
+import authService from '../services/authService.js';
 
 const login = (req, res) => {
     const { username, password } = req.body;
@@ -22,4 +22,4 @@ const logout = (req, res) => {
     res.json({ message: "Logout berhasil!" });
 };
 
-module.exports = { login, logout };
+export default { login, logout };

@@ -1,4 +1,4 @@
-const { users } = require('../utils/db');
+import { users } from '../utils/db.js';
 
 const getSaldo = (sessionId) => {
     if (!sessionId || !users[sessionId]) return null;
@@ -23,4 +23,4 @@ const transfer = (sessionId, targetUser, amount) => {
     return { success: true, message: `Berhasil mentransfer Rp ${transferAmount} ke ${targetUser}.` };
 };
 
-module.exports = { getSaldo, transfer };
+export default { getSaldo, transfer };

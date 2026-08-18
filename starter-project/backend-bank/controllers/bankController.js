@@ -1,4 +1,4 @@
-const bankService = require('../services/bankService');
+import bankService from '../services/bankService.js';
 
 const getSaldo = (req, res) => {
     const sessionId = req.cookies.session_id;
@@ -22,4 +22,4 @@ const transfer = (req, res) => {
     res.json({ message: result.message });
 };
 
-module.exports = { getSaldo, transfer };
+export default { getSaldo, transfer };

@@ -8,4 +8,4 @@ let comments = [
     { id: 2, text: "Gampang digunakan, mantap." }
 ];
 
-module.exports = { users, comments };
+export { users, comments };

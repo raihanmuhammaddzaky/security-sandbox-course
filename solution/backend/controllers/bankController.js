@@ -1,4 +1,4 @@
-const bankService = require('../services/bankService');
+import bankService from '../services/bankService.js';
 
 const getSaldo = (req, res) => {
     const sessionId = req.cookies.session_id;
@@ -7,32 +7,24 @@ const getSaldo = (req, res) => {
     if (saldo === null) {
         return res.status(401).json({ message: "Anda belum login!" });
     }
-    
     res.json({ saldo });
 };
 
 const transfer = (req, res) => {
-    // VULNERABILITY: Server HANYA mengecek keberadaan cookie, tanpa memverifikasi dari origin mana request ini datang atau mengecek Anti-CSRF Token.
-    const sessionId = req.cookies.session_id;
-    
-    if (!sessionId) {
-        return res.status(401).json({ message: "Anda belum login!" });
-    }
-
-    // PATCH: Cek Anti-CSRF Token
+    // VULNERABILITY FIXED: Validasi CSRF Token
     const csrfToken = req.headers['x-csrf-token'];
-    if (!csrfToken || csrfToken !== 'token-rahasia-123') {
-        return res.status(403).json({ message: "CSRF Token tidak valid atau hilang!" });
+    if (csrfToken !== 'token-rahasia-123') {
+        return res.status(403).json({ message: "CSRF Token tidak valid atau tidak ada!" });
     }
 
+    const sessionId = req.cookies.session_id;
     const { targetUser, amount } = req.body;
     
     const result = bankService.transfer(sessionId, targetUser, amount);
     if (result.error) {
         return res.status(result.status).json({ message: result.error });
     }
-    
     res.json({ message: result.message });
 };
 
-module.exports = { getSaldo, transfer };
+export default { getSaldo, transfer };

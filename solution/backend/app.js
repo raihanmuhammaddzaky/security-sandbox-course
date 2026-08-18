@@ -1,8 +1,7 @@
-const express = require('express');
-const cookieParser = require('cookie-parser');
-// TODO 1 (CORS): Import library 'cors' di sini
-const cors = require('cors');
-const routes = require('./routes');
+import express from 'express';
+import cookieParser from 'cookie-parser';
+import cors from 'cors';
+import routes from './routes/index.js';
 
 const app = express();
 
@@ -11,9 +10,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-// TODO 1 (CORS): Gunakan middleware cors di sini agar Frontend Bank (localhost:5173) diizinkan mengakses API ini.
-app.use(cors({ origin: 'http://localhost:5173', credentials: true }));
+// VULNERABILITY FIXED: CORS diaktifkan HANYA untuk origin yang dipercaya
+// dan credentials diizinkan agar cookie bisa dikirim.
+app.use(cors({ 
+    origin: 'http://localhost:5173', 
+    credentials: true 
+}));
 
 app.use('/', routes);
 
-module.exports = app;
+export default app;
