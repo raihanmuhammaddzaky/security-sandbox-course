@@ -5,22 +5,22 @@ export const apiLogin = async (username, password) => {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ username, password }),
-    credentials: 'omit' // TODO 1 (SOP/CORS): Ubah menjadi 'include' agar cookie session dikirim setelah CORS diperbaiki!
+    credentials: 'include' // TODO 1 (SOP/CORS): Ubah menjadi 'include' agar cookie session dikirim setelah CORS diperbaiki!
   });
   return response;
 };
 
 export const apiLogout = async () => {
   const response = await fetch(`${API_URL}/logout`, {
-    method: 'POST', 
-    credentials: 'omit' /* TODO 1: Ubah 'include' */
+    method: 'POST',
+    credentials: 'include' /* TODO 1: Ubah 'include' */
   });
   return response;
 };
 
 export const apiGetSaldo = async () => {
   const response = await fetch(`${API_URL}/saldo`, {
-    // credentials: 'omit' // TODO 1: Ubah 'include' agar backend bisa membaca cookie session.
+    credentials: 'include' // TODO 1: Ubah 'include' agar backend bisa membaca cookie session.
   });
   return response;
 };
@@ -33,7 +33,7 @@ export const apiTransfer = async (targetUser, amount) => {
       // TODO 3 (CSRF): Jika backend sudah mewajibkan token, tambahkan header: 'X-CSRF-Token': 'nilai_token_disini'
     },
     body: JSON.stringify({ targetUser, amount }),
-    // credentials: 'omit' // TODO 1: Ubah 'include'
+    credentials: 'omit' // TODO 1: Ubah 'include'
   });
   return response;
 };
